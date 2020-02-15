@@ -2,31 +2,39 @@
 Vue.component('coin-detail', {
   props: ['coin'],
 
-  data(){
+  data() {
     return {
       showPrices: false,
       value: 0
-    }
+    };
+  },
+
+  created() {
+    console.log('Created Coin-Detail');
+  },
+
+  mounted() {
+    console.log('Mounted Coin-Detail');
   },
 
   methods: {
-    toggleShowPrices(){
-      this.showPrices = !this.showPrices
-      this.$emit('change-color')
+    toggleShowPrices() {
+      this.showPrices = !this.showPrices;
+      this.$emit('change-color');
     }
   },
 
   computed: {
-    title(){
-      return `${this.coin.name} - ${this.coin.symbol}`
+    title() {
+      return `${this.coin.name} - ${this.coin.symbol}`;
     },
 
-    convertedValue(){
-      if(!this.value){
-        return 0
+    convertedValue() {
+      if (!this.value) {
+        return 0;
       }
 
-      return this.value / this.coin.price
+      return this.value / this.coin.price;
     }
   },
 
@@ -48,6 +56,7 @@ Vue.component('coin-detail', {
       </h1>
       <input type="number" v-model="value">
       <span> {{ convertedValue }}</span>
+      <slot name="text"></slot>
       <ul v-show="showPrices">
       <li 
         class="uppercase"
@@ -60,9 +69,7 @@ Vue.component('coin-detail', {
     </ul>
     </div>
     `
-})
-
-
+});
 
 new Vue({
   el: '#app',
@@ -71,7 +78,7 @@ new Vue({
     return {
       btc: {
         name: 'Bitcoin',
-        symbol : 'BTC',
+        symbol: 'BTC',
         img: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png',
         changePercent: 10,
         price: 8400,
@@ -82,26 +89,35 @@ new Vue({
           { day: 'Jueves', value: 9000 },
           { day: 'Viernes', value: 12000 },
           { day: 'Sabado', value: 10000 },
-          { day: 'Domingo', value: 10200 },
-        ],
+          { day: 'Domingo', value: 10200 }
+        ]
       },
 
-      color: 'f4f4f4',
-    }
+      color: 'f4f4f4'
+    };
+  },
+
+  created() {
+    console.log('Created');
+  },
+
+  mounted() {
+    console.log('Mounted');
   },
 
   methods: {
-    updateColor(){
+    updateColor() {
       // Night mode
-      this.color = this.color.split('')
+      this.color = this.color
+        .split('')
         .reverse()
-        .join('')
+        .join('');
     }
   },
 
   computed: {
-    backgroundColor(){
-      return `#${this.color}`
+    backgroundColor() {
+      return `#${this.color}`;
     }
   }
-})
+});
