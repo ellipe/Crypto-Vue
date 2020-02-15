@@ -12,6 +12,7 @@ Vue.component('coin-detail', {
   methods: {
     toggleShowPrices(){
       this.showPrices = !this.showPrices
+      this.$emit('change-color')
     }
   },
 
@@ -89,17 +90,16 @@ new Vue({
     }
   },
 
-  // methods: {
-  //   toggleShowPrices(){
-  //     this.showPrices = !this.showPrices
-
-  //     // Night mode
-  //     this.color = this.color.split('').reverse().join('')
-  //   }
-  // },
+  methods: {
+    updateColor(){
+      // Night mode
+      this.color = this.color.split('')
+        .reverse()
+        .join('')
+    }
+  },
 
   computed: {
-    
     backgroundColor(){
       return `#${this.color}`
     }

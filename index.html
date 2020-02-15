@@ -10,7 +10,7 @@
 
 <body>
   <div id="app" v-bind:style="{background: backgroundColor}">
-    <coin-detail v-bind:coin="btc" />
+    <coin-detail v-bind:coin="btc" v-on:change-color="updateColor"/>
    
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
